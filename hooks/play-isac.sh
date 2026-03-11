@@ -140,6 +140,19 @@ esac
 # Exit silently if no main sound found
 [[ -z "$MAIN_SOUND" || ! -f "$MAIN_SOUND" ]] && exit 0
 
+# --- Global playback lock (prevent overlapping sounds across sessions) ---
+LOCK_DIR="/tmp/claude-isac-playback.lock"
+if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+  # Stale lock recovery: if lock is older than 10s, assume crash and reclaim
+  if [[ -d "$LOCK_DIR" ]] && [[ $(($(date +%s) - $(stat -f %m "$LOCK_DIR" 2>/dev/null || echo "0"))) -gt 10 ]]; then
+    rmdir "$LOCK_DIR" 2>/dev/null
+    mkdir "$LOCK_DIR" 2>/dev/null || exit 0
+  else
+    exit 0
+  fi
+fi
+trap 'rmdir "$LOCK_DIR" 2>/dev/null' EXIT
+
 # --- Playback execution ---
 # Wrapped events: transmission_in -> main -> transmission_out (sequential)
 play_file "$SOUNDS_DIR/ISAC-transmission_in.mp3"
