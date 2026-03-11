@@ -94,17 +94,9 @@ case "$EVENT" in
       "$SOUNDS_DIR/ISAC-checkpoint_update_3.mp3")
     ;;
   permission)
-    # Play transmission_in and set flag (ISAC awaiting authorization)
-    touch /tmp/claude-isac-permission-pending
-    play_file "$SOUNDS_DIR/ISAC-transmission_in.mp3"
-    exit 0
+    MAIN_SOUND="$SOUNDS_DIR/ISAC-database_access.mp3"
     ;;
   permission-out)
-    # Play transmission_out only if a permission was pending, then clear flag
-    PENDING="/tmp/claude-isac-permission-pending"
-    [[ ! -f "$PENDING" ]] && exit 0
-    rm -f "$PENDING"
-    play_file "$SOUNDS_DIR/ISAC-transmission_out.mp3"
     exit 0
     ;;
   prompt-submit)

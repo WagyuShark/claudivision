@@ -129,7 +129,7 @@ HOOKS_JSON='{
   "PermissionRequest": [{"hooks": [{"type": "command", "command": "$HOME/.claude/hooks/play-isac.sh permission &"}]}],
   "UserPromptSubmit": [{"hooks": [{"type": "command", "command": "$HOME/.claude/hooks/play-isac.sh prompt-submit &"}]}],
   "PreToolUse": [
-    {"matcher": ".*", "hooks": [{"type": "command", "command": "$HOME/.claude/hooks/play-isac.sh permission-out &"}]},
+    {"matcher": ".*", "hooks": [{"type": "command", "command": "$HOME/.claude/hooks/play-isac.sh permission-out"}]},
     {"matcher": "WebSearch|WebFetch", "hooks": [{"type": "command", "command": "$HOME/.claude/hooks/play-isac.sh web-search-pre 5 &"}]},
     {"matcher": "mcp__.*", "hooks": [{"type": "command", "command": "$HOME/.claude/hooks/play-isac.sh mcp-pre 5 &"}]}
   ],
