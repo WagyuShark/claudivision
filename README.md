@@ -9,7 +9,7 @@ https://github.com/user-attachments/assets/placeholder
 ## Quick Start
 
 ```bash
-git clone https://github.com/w00ing/claudivision.git
+git clone https://github.com/WagyuShark/claudivision.git
 cd claudivision
 ./install.sh
 ```
